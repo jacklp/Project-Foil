@@ -44,8 +44,9 @@ public class ViewModel : MonoBehaviour {
                 if (Input.GetMouseButtonDown(0))
                 {
                     Destroy(BuildPlaceHolder);
+                    GameObject go = new GameObject(BuildingType.name);
                     ToBuild = Instantiate(BuildingType, new Vector3(hit.point.x, 0.1F, hit.point.z), Quaternion.identity) as GameObject;
-                    
+                    ToBuild.transform.SetParent(go.transform, true);
                 }
             }            
         }
@@ -53,6 +54,7 @@ public class ViewModel : MonoBehaviour {
 
     public void onClick()
     {
+
         BuildPlaceHolder = Instantiate(BuildPlaceHolderPrefab, new Vector3(pos.x, 0.1F, pos.z), Quaternion.identity) as GameObject;
         //Single instance of placeholder to exist
         //Appears upon build wall click, disappears upon construction    
