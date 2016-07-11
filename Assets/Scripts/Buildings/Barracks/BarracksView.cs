@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BarracksView : MonoBehaviour {
+public class BarracksView : BuildingView {
 
-	// Use this for initialization
-	void Start () {
+    public GameObject soldier;
+
+    // Use this for initialization
+    void Start () {
         GetComponent<Canvas>().worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 	}
 	
@@ -16,11 +18,11 @@ public class BarracksView : MonoBehaviour {
     public void CloseView()
     {
         Debug.Log("Clicked close");
-        Destroy(this);
+        Destroy(gameObject);
     }
 
-    public void BuildPerson()
+    public void buildSoldier()
     {
-
+        BuildPerson(soldier);
     }
 }

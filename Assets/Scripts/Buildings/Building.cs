@@ -5,7 +5,6 @@ public class Building : MonoBehaviour {
 
     public int HP;
     public int Armour;
-    public GameObject GameController;
     
     public Vector3 RallyPosition;
     public bool isRally;
@@ -30,8 +29,8 @@ public class Building : MonoBehaviour {
 
             // get current width and height of mesh.
             Bounds bounds = mesh.bounds;
-            float width = bounds.size.x;
-            float depth = bounds.size.z;
+            float width = bounds.size.x * transform.localScale.x;
+            float depth = bounds.size.z * transform.localScale.z;
 
             // get current transform.
             float x = transform.position.x;
@@ -42,7 +41,7 @@ public class Building : MonoBehaviour {
             float personZ = z - depth / 2;
 
             //instantiate person and add to game controller
-            GameController.GetComponent<GameController>().People.Add(Instantiate(person, new Vector3(personX, 0.5F, personZ), Quaternion.identity) as GameObject);
+            GameController.Instance.People.Add(Instantiate(person, new Vector3(personX, 0.5F, personZ), Quaternion.identity) as GameObject);
 
         }
     }
@@ -64,6 +63,7 @@ public class Building : MonoBehaviour {
         {
             GameObject view = Instantiate(View, Vector3.zero, Quaternion.identity) as GameObject;
             view.transform.SetParent(transform.parent, false);
+            view.transform.SetAsLastSibling();
             //view.transform.parent = transform;
         }
     }
